@@ -403,7 +403,7 @@ export default class CTweenMachine extends Component
             const target = targets[i];
             const property = target.property;
 
-            if (target.isNumber && valuesB) {
+            if (target.isNumber && valuesB && valuesB[i]) {
                 const vA = valuesA[i];
                 const vB = valuesB[i];
                 if (target.isArray) {
@@ -424,7 +424,7 @@ export default class CTweenMachine extends Component
                 }
             }
             else if (!valuesB || doSwitch) {
-                const value = valuesB ? valuesB[i] : valuesA[i];
+                const value = valuesB && valuesB[i] ? valuesB[i] : valuesA[i];
 
                 if (target.isArray) {
                     let changed = false;

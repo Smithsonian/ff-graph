@@ -397,26 +397,8 @@ export default class Property<T = any> extends Publisher
 
     reset()
     {
-        let value;
-
-        if (this.isMulti()) {
-            let multiArray: T[] = this.value as any;
-
-            if (!multiArray) {
-                value = multiArray = [] as any;
-            }
-            else {
-                multiArray.length = 1;
-            }
-
-            multiArray[0] = this.clonePreset();
-        }
-        else {
-            value = this.clonePreset();
-        }
-
         // set changed flag and push to output links
-        this.setValue(value);
+        this.setValue(this.clonePreset());
     }
 
     setMultiChannelCount(count: number)
@@ -477,7 +459,7 @@ export default class Property<T = any> extends Publisher
         return Array.isArray(this.schema.preset);
     }
 
-    isMulti(): boolean
+    isMulti(): this is Property<any[]>
     {
         return !!this.schema.multi;
     }
